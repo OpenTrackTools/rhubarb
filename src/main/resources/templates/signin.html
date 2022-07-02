@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{skeleton.html}">>
+<head>
+  <meta charset="UTF-8">
+  <title>Signin :: Rhubarb</title>
+</head>
+<body layout:fragment="body">
+<div class="container mt-3" layout:fragment="content">
+  <div class="text-center mb-5 mt-5 ">
+    <h3 class="display-5">Sign In</h3>
+  </div>
+  <div class="card col-4 m-0 m-auto shadow border-0 pt-3 pb-3">
+    <div class="card-body">
+      <div class="container">
+        <form action="" autocomplete="off" th:action="@{/signin}" th:method="@{'POST'}" th:object="${form}">
+          <div class="mb-3">
+            <label class="form-label" for="login">Username or email address</label>
+            <input autocomplete="off" class="form-control" id="login" th:field="*{login}" type="text"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input autocomplete="off" class="form-control" id="password" th:field="*{password}" type="password">
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

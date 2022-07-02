@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{skeleton.html}">
+<body layout:fragment="body">
+  <header th:class="@{p-3 bg-dark text-white shadow}">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center">
+        <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none" th:href="@{/}">
+          <span class="fw-bold me-2">Rhubarb</span>
+        </a>
+        <div class="dropdown">
+          <a th:href="@{#}" class="d-block text-decoration-none text-white dropdown-toggle" data-bs-toggle="dropdown">
+            {{ category }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-dark rounded-3 mt-1 p-1 shadow w-75">
+            <ul class="list-unstyled mb-0">
+              <li><a class="dropdown-item rounded-2" href="#">Category 1</a></li>
+              <li><a class="dropdown-item rounded-2" href="#">Category 2</a></li>
+            </ul>
+          </div>
+        </div>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a th:href="@{/}" class="nav-link px-2 text-white">Home</a></li>
+          <li><a th:href="@{/issues}" class="nav-link px-2 text-white">Issues</a></li>
+        </ul>
+        <div class="dropdown text-end">
+          <a th:href="@{#}" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown">
+            <img src="/images/profile.jpg" th:src="@{/images/profile.jpg}" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark mt-1 p-1 rounded-3 shadow">
+            <li><a class="dropdown-item rounded-2" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item rounded-2" href="#">New Issue</a></li>
+            <li><a class="dropdown-item rounded-2" href="#">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item rounded-2" href="#">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div layout:fragment="content"></div>
+  </main>
+</body>
+</html>
