@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{skeleton.html}">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${#authentication.getPrincipal().getUsername()}"></title>
+</head>
+<body>
+
+</body>
+</html>

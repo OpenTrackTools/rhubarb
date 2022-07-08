@@ -1,17 +1,15 @@
 package org.rhubarb.domain.models.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 import org.rhubarb.domain.models.commons.BaseEntity;
+import org.rhubarb.domain.models.database.DataBase;
 
 import java.io.Serial;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Arpan Mukhopadhyay
@@ -21,6 +19,7 @@ import java.util.UUID;
     @Index(unique = true, name = "index_email_on_users", columnList = "email")})
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserEntity extends BaseEntity {
   
   @Serial
@@ -29,7 +28,6 @@ public class UserEntity extends BaseEntity {
   @NaturalId
   @Column(name = "object_id", nullable = false, unique = true)
   private String objectId;
-  
   
   @Column(name = "username", nullable = false)
   private String username;
@@ -82,8 +80,13 @@ public class UserEntity extends BaseEntity {
   @Column(name = "avatar", length = 1024)
   private String avatar;
   
-  @Column(name = "role", length = 4, nullable = false)
-  private short role;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "users_roles",
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+  )
+  private Collection<RoleEntity> roles;
   
   @Column(name = "user_type", length = 4, nullable = false)
   private short userType;
@@ -103,6 +106,9 @@ public class UserEntity extends BaseEntity {
   @Column(name = "is_ldap")
   private boolean isLdapAuth;
   
+  @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+  private DataBase lastWorkingDatabase;
+  
   /**
    *
    * @param username
@@ -112,5 +118,21 @@ public class UserEntity extends BaseEntity {
     this.objectId = UUID.randomUUID().toString().replace("-", "");
     this.username = username;
     this.email = email;
+    if (null == this.roles) this.roles = new ArrayList<>();
+  }
+  
+  /**
+   *
+   * @param roleEntities
+   */
+  public void addRoles(RoleEntity... roleEntities) {
+    if (null != roleEntities && roleEntities.length > 0) {
+      Collections.addAll(this.roles, roleEntities);
+    }
+  }
+  
+  @Override
+  public String toString() {
+    return String.format("User{username=%s, email=%s}", username, email);
   }
 }

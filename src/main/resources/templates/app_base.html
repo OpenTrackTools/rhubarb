@@ -25,17 +25,28 @@
           <li><a th:href="@{/}" class="nav-link px-2 text-white">Home</a></li>
           <li><a th:href="@{/issues}" class="nav-link px-2 text-white">Issues</a></li>
         </ul>
+        <ul class="nav mb-2 me-3 justify-content-center mb-md-0">
+          <li>
+            <a th:href="@{/admin/settings}" class="nav-link px-2 text-white">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+            </a>
+          </li>
+        </ul>
         <div class="dropdown text-end">
           <a th:href="@{#}" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown">
-            <img src="/images/profile.jpg" th:src="@{/images/profile.jpg}" alt="mdo" width="32" height="32" class="rounded-circle">
+            <img src="/images/profile.jpg" th:src="@{/images/profile.png}" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark mt-1 p-1 rounded-3 shadow">
-            <li><a class="dropdown-item rounded-2" href="#">Profile</a></li>
+            <li><a class="dropdown-item rounded-2" th:href="${#authentication.getPrincipal().getUsername()}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item rounded-2" href="#">New Issue</a></li>
             <li><a class="dropdown-item rounded-2" href="#">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item rounded-2" href="#">Sign out</a></li>
+            <li>
+              <form method="post" th:action="@{/signout}">
+                <button class="dropdown-item rounded-2" type="submit">Sign out</button>
+              </form>
+            </li>
           </ul>
         </div>
       </div>

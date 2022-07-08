@@ -1,8 +1,11 @@
 package org.rhubarb.domain.application.service.impl;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.rhubarb.domain.models.user.RoleEntity;
 import org.rhubarb.domain.models.user.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
@@ -13,6 +16,7 @@ import java.util.List;
 /**
  * @author Arpan Mukhopadhyay
  */
+@Slf4j
 public class ApplicationUserDetails implements UserDetails {
   
   @Serial
@@ -32,6 +36,9 @@ public class ApplicationUserDetails implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     List<GrantedAuthority> authorities = new ArrayList<>();
+    List<RoleEntity> roles = (List<RoleEntity>) this.userEntity.getRoles();
+    log.info("User roles {}", roles);
+    roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName().toUpperCase())));
     return authorities;
   }
   

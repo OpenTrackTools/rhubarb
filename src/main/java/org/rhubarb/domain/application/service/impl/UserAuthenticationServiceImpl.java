@@ -1,9 +1,12 @@
 package org.rhubarb.domain.application.service.impl;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.rhubarb.domain.application.response.auth.AuthServiceResponse;
+import org.rhubarb.domain.models.user.RoleEntity;
 import org.rhubarb.domain.models.user.UserEntity;
+import org.rhubarb.infra.RoleRepository;
 import org.rhubarb.infra.UserRepository;
 import org.rhubarb.web.forms.SignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +26,26 @@ public class UserAuthenticationServiceImpl {
   @Autowired
   private PasswordEncoder passwordEncoder;
   
+  @Autowired
+  private RoleRepository roleRepository;
+  
   //TODO - Create Admin user during installation process
   @PostConstruct
+  @Transactional
   private void createAdmin() {
     UserEntity adminUserEntity = userRepository.findUserEntityByUsername("admin").orElse(null);
     if (null == adminUserEntity) {
-      adminUserEntity = new UserEntity("admin", "admin@rhubarb.com");
+      adminUserEntity = new UserEntity("arpan", "arpan@rhubarb.com");
       adminUserEntity.setPassword(passwordEncoder.encode("admin"));
-      adminUserEntity.setRole((short) 1);
+      RoleEntity adminRole = new RoleEntity("ADMIN", "Admin role", (short) 0);
+      adminUserEntity.addRoles(adminRole);
+      try {
+        roleRepository.save(adminRole);
+        userRepository.save(adminUserEntity);
+        log.info("Admin user created successfully, {}", adminUserEntity);
+      } catch (Exception e) {
+        log.error("Error - ", e);
+      }
     }
   }
   

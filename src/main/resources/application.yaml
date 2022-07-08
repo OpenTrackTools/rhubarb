@@ -1,0 +1,35 @@
+#spring.thymeleaf.prefix=file:src/main/resources/templates/
+#spring.thymeleaf.cache=false
+#spring.thymeleaf.mode=HTML
+#spring.resources.cache.period=0
+#
+#spring.profiles.active=dev
+#
+#spring.datasource.
+
+spring:
+  profile:
+    active: dev
+  resources:
+    cache:
+      period: 0
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: false
+    mode: HTML
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rhubarb_dev
+    username: rhubarb_admin
+    password: p2YtGUQCTaI
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  devtools:
+    restart:
+      log-condition-evaluation-delta: false

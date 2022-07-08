@@ -2,13 +2,13 @@ package org.rhubarb.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,15 +24,18 @@ public class ApplicationUserSecurityConfig {
       "/error",
       "/signin",
       "/signout",
-      "/signup"
+      "/signup",
+      //Dev endpoints
+      "/h2-console/**"
   };
   
   private static final String[] WEB_RESOURCE_ENDPOINTS = new String[]{
       "/css/**",
       "/js/**",
       "/images/**",
-      "/favicon.ico",
-      "/fonts/**"
+      "/fonts/**",
+      "/static/webfonts/**",
+      "/favicon.ico"
   };
   
   @Bean
@@ -47,12 +50,15 @@ public class ApplicationUserSecurityConfig {
   
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.cors().and()
+    http.cors().and().csrf(csrf -> csrf.csrfTokenRepository(new CookieCsrfTokenRepository()))
         .authorizeHttpRequests((auth) -> auth.antMatchers(NON_SECURED_ENDPOINTS).permitAll()
             .antMatchers(WEB_RESOURCE_ENDPOINTS).permitAll().anyRequest().authenticated())
         .formLogin().loginPage("/signin").loginProcessingUrl("/signin").usernameParameter("login")
-        .passwordParameter("password").and().logout().logoutUrl("/signout").clearAuthentication(true)
-        .logoutSuccessUrl("/signin").and().cors();
+        .passwordParameter("password").and().logout(logout -> logout
+            .logoutUrl("/signout")
+            .logoutSuccessUrl("/")
+            .invalidateHttpSession(true)
+            .deleteCookies("remove"));
     return http.build();
   }
 }

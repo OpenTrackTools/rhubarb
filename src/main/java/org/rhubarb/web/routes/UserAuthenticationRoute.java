@@ -7,6 +7,9 @@ import org.rhubarb.domain.application.service.impl.UserAuthenticationServiceImpl
 import org.rhubarb.web.forms.SigninForm;
 import org.rhubarb.web.forms.SignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,10 @@ public class UserAuthenticationRoute extends BaseRoute {
   
   @GetMapping(path = {"/signin"})
   String signin(@ModelAttribute("form") SigninForm form) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (!(auth instanceof AnonymousAuthenticationToken)) {
+      return DASHBOARD_VIEW_REDIRECTED;
+    }
     return SIGNIN_VIEW;
   }
   
