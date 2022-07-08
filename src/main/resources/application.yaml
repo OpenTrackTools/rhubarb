@@ -18,12 +18,13 @@ spring:
     cache: false
     mode: HTML
   datasource:
-    url: jdbc:postgresql://localhost:5432/rhubarb_dev
-    username: rhubarb_admin
-    password: p2YtGUQCTaI
+#    url: jdbc:postgresql://localhost:5432/rhubarb_dev
+#    username: rhubarb_admin
+#    password: p2YtGUQCTaI
   jpa:
     hibernate:
-      ddl-auto: update
+      hbm2ddl:
+        auto: create
     show-sql: true
   h2:
     console:

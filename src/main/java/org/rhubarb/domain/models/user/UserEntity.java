@@ -78,7 +78,8 @@ public class UserEntity extends BaseEntity {
   private String twitter;
   
   @Column(name = "avatar", length = 1024)
-  private String avatar;
+  @Lob
+  private byte[] avatar;
   
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
