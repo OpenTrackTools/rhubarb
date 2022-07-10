@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class AdminRoutes extends BaseRoute {
   
-  
   @PreAuthorize("hasAuthority('ADMIN')")
-  @GetMapping(path = {"/settings"})
+  @GetMapping(path = {"/"})
   String settings() {
-    return ADMIN_SETTINGS;
+    return ADMIN_DASHBOARD;
   }
 }

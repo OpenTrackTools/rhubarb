@@ -9,6 +9,7 @@ public interface I_ViewConstants {
   String SIGNIN_VIEW = "signin";
   String SIGNUP_VIEW = "signup";
   String ADMIN_SETTINGS="admin/settings";
+  String ADMIN_DASHBOARD = "admin/index";
   String DASHBOARD_VIEW = "/";
   String DASHBOARD_VIEW_REDIRECTED = REDIRECT + DASHBOARD_VIEW;
   
