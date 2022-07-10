@@ -5,7 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       layout:decorate="~{skeleton.html}">
 <body layout:fragment="body">
-  <header th:class="@{p-3 bg-dark text-white shadow}">
+  <header th:class="@{p-3 bg-dark text-white fixed-top shadow}">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center">
         <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none" th:href="@{/}">
@@ -26,18 +26,19 @@
           <li><a th:href="@{/}" class="nav-link px-2 text-white">Home</a></li>
           <li><a th:href="@{/issues}" class="nav-link px-2 text-white">Issues</a></li>
         </ul>
-        
+        <input type="hidden" th:value="${pathName}">
         <ul sec:authorize="hasAuthority('ADMIN')" class="nav col-12 col-lg-auto ms-lg-auto ms-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a th:href="@{/admin/databases}" class="nav-link px-2 text-white">Databases</a></li>
-          <li><a th:href="@{/admin/category}" class="nav-link px-2 text-white">Categories</a></li>
+          <li><a th:href="@{/admin}" class="nav-link px-2 text-white fw-semi-bold" th:classappend="${pathName == '/admin' ? 'active':'' }">Home</a></li>
+          <li><a th:href="@{/admin/databases}" class="nav-link px-2 text-white fw-semi-bold" th:classappend="${pathName == '/admin/databases' ? 'active':'' }">Databases</a></li>
+          <li><a th:href="@{/admin/category}" class="nav-link px-2 text-white fw-semi-bold" th:classappend="${pathName == '/admin/category' ? 'active':'' }">Categories</a></li>
           <li>
-            <a th:href="@{#}" class="nav-link px-2 text-white" data-bs-toggle="dropdown">User &amp; Roles</a>
+            <a th:href="@{#}" class="nav-link px-2 text-white fw-semi-bold" data-bs-toggle="dropdown">User &amp; Roles</a>
             <ul class="dropdown-menu dropdown-menu dropdown-menu-dark mt-1 p-1 rounded-3 shadow">
-              <li><a class="dropdown-item rounded-2" href="@{/admin/users}">Users</a></li>
-              <li><a class="dropdown-item rounded-2" href="@{/admin/ugs}">User groups</a></li>
+              <li><a class="dropdown-item rounded-2" th:href="@{/admin/users}">Users</a></li>
+              <li><a class="dropdown-item rounded-2" th:href="@{/admin/ugs}">User groups</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item rounded-2" href="@{/admin/roles}">Roles</a></li>
-              <li><a class="dropdown-item rounded-2" href="@{/admin/urs}">User roles</a></li>
+              <li><a class="dropdown-item rounded-2" th:href="@{/admin/roles}">Roles</a></li>
+              <li><a class="dropdown-item rounded-2" th:href="@{/admin/urs}">User roles</a></li>
             </ul>
           </li>
         </ul>

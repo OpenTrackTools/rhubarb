@@ -1,3 +1,17 @@
 body {
-    font-size: 0.95rem !important;
+    font-size: 0.975rem !important;
+}
+
+main {
+    top: 71px !important;
+    position: absolute;
+    width: 100%;
+}
+
+.text-white.active {
+    color: var(--bs-gray-500) !important;
+}
+
+.fw-semi-bold {
+    font-weight: 500 !important;
 }

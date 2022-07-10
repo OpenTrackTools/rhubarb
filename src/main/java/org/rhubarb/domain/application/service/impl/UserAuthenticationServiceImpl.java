@@ -8,7 +8,7 @@ import org.rhubarb.domain.models.user.RoleEntity;
 import org.rhubarb.domain.models.user.UserEntity;
 import org.rhubarb.infra.RoleRepository;
 import org.rhubarb.infra.UserRepository;
-import org.rhubarb.web.forms.SignupForm;
+import org.rhubarb.web.forms.auth.SignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

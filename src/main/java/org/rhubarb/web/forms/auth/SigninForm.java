@@ -1,4 +1,4 @@
-package org.rhubarb.web.forms;
+package org.rhubarb.web.forms.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,11 @@ import java.io.Serializable;
  */
 @Getter
 @AllArgsConstructor
-public class SignupForm implements Serializable {
+public class SigninForm implements Serializable {
   
   @Serial
-  private static final long serialVersionUID = -1332927017585253717L;
+  private static final long serialVersionUID = 870905568727474579L;
   
-  private String username;
-  private String email;
+  private String login;
   private String password;
 }

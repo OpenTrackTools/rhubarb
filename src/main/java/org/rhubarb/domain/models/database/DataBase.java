@@ -30,6 +30,9 @@ public class DataBase extends BaseEntity {
   @Column(name = "name", nullable = false)
   private String name;
   
+  @Column(name = "visibility", nullable = false)
+  private Visibility visibility = Visibility.PUBLIC;
+  
   @Column(name = "description")
   private String description;
   
