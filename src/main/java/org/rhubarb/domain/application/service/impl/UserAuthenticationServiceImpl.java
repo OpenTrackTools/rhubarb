@@ -37,7 +37,7 @@ public class UserAuthenticationServiceImpl {
     if (null == adminUserEntity) {
       adminUserEntity = new UserEntity("arpan", "arpan@rhubarb.com");
       adminUserEntity.setPassword(passwordEncoder.encode("admin"));
-      RoleEntity adminRole = new RoleEntity("ADMIN", "Admin role", (short) 0);
+      RoleEntity adminRole = new RoleEntity("Administrator", "Administrator role", "ADM");
       adminUserEntity.addRoles(adminRole);
       try {
         roleRepository.save(adminRole);

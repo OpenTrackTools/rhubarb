@@ -13,7 +13,6 @@ import java.io.Serial;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author Arpan Mukhopadhyay
@@ -40,17 +39,17 @@ public class RoleEntity extends BaseEntity {
   @Column(name = "description")
   private String description;
   
-  @Column(name = "short_code", nullable = false)
-  private short shortCode;
+  @Column(name = "key", length = 8, unique = true)
+  private String key;
   
   @ManyToMany(mappedBy = "roles")
   private Collection<UserEntity> users;
   
-  public RoleEntity(@NotBlank String name, String description, short shortCode) {
+  public RoleEntity(@NotBlank String name, String description, String key) {
     this.objectId = RandomStringUtils.randomAlphanumeric(6);
     this.name = name;
     this.description = description;
-    this.shortCode = shortCode;
+    this.key = key;
     this.setCreatedAt(new Date());
   }
   
@@ -61,7 +60,7 @@ public class RoleEntity extends BaseEntity {
     
     RoleEntity that = (RoleEntity) o;
     
-    if (shortCode != that.shortCode) return false;
+    if (!key.equals(that.getKey())) return false;
     return name.equals(that.name);
   }
   
@@ -80,6 +79,6 @@ public class RoleEntity extends BaseEntity {
   
   @Override
   public int hashCode() {
-    return Objects.hash(name, shortCode);
+    return Objects.hash(name, key);
   }
 }
