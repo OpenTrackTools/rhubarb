@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.annotations.NaturalId;
 import org.rhubarb.domain.models.commons.BaseEntity;
 
 import java.io.Serial;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,10 +47,11 @@ public class RoleEntity extends BaseEntity {
   private Collection<UserEntity> users;
   
   public RoleEntity(@NotBlank String name, String description, short shortCode) {
-    this.objectId = UUID.randomUUID().toString().replace("-", "");
+    this.objectId = RandomStringUtils.randomAlphanumeric(6);
     this.name = name;
     this.description = description;
     this.shortCode = shortCode;
+    this.setCreatedAt(new Date());
   }
   
   @Override
@@ -60,6 +63,14 @@ public class RoleEntity extends BaseEntity {
     
     if (shortCode != that.shortCode) return false;
     return name.equals(that.name);
+  }
+  
+  /**
+   * Returns the count of total users with this role.
+   * @return the count
+   */
+  public int totalUsers() {
+    return users.size();
   }
   
   @Override

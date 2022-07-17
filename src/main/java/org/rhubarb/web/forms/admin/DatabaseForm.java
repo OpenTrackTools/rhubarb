@@ -22,7 +22,7 @@ public class DatabaseForm implements Serializable {
   
   private String name;
   private String description;
-  private String note;
+  private String notes;
   private String shortCode;
   private Visibility visibility;
 }

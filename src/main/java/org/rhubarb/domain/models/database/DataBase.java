@@ -36,9 +36,9 @@ public class DataBase extends BaseEntity {
   @Column(name = "description")
   private String description;
   
-  @Column(name = "note")
-  private String note;
+  @Column(name = "notes")
+  private String notes;
   
-  @Column(name = "short_code")
+  @Column(name = "short_code", length = 12)
   private String shortCode;
 }

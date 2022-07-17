@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{app_base.html}">
 <head>
-  <meta charset="UTF-8">
+  <th:block th:insert="external_js"></th:block>
   <title>Title</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <div class="container mt-5">
       <div class="col-6 offset-3">
         <span class="fs-2 d-block text-center">Create Database</span>
-        <span class="font-monospace d-block mt-1 mb-4">A database is a virtual space where issues can be stored in categories.</span>
+        <span class="font-monospace d-block mt-1 mb-4">A database is a virtual space where you can store the issues.</span>
         <form th:object="${form}">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
           <div class="mb-3">
@@ -20,10 +20,17 @@
             <input autocomplete="off" id="name" th:field="*{name}" type="text" class="form-control w-100"/>
           </div>
           <div class="mb-3">
-            <label class="form-label fw-semi-bold" for="description">Description</label>
+            <label class="form-label fw-semi-bold" for="code">Code</label>
+            <input autocomplete="off" id="code" th:field="*{name}" type="text" class="form-control w-25"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semi-bold" for="description">Description<span class="text-muted"> (Optional)</span></label>
             <input autocomplete="off" id="description" th:field="*{description}" type="text" class="form-control w-100"/>
           </div>
-          
+          <div class="mb-3">
+            <label class="form-label fw-semi-bold" for="notes">Notes<span class="text-muted"> (Optional)</span></label>
+            <textarea id="notes" class="rt-editor" th:field="*{notes}"></textarea>
+          </div>
         </form>
       </div>
     </div>

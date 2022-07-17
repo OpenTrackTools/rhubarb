@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.annotations.NaturalId;
 import org.rhubarb.domain.models.commons.BaseEntity;
 import org.rhubarb.domain.models.database.DataBase;
@@ -116,7 +117,7 @@ public class UserEntity extends BaseEntity {
    * @param email
    */
   public UserEntity(String username, String email) {
-    this.objectId = UUID.randomUUID().toString().replace("-", "");
+    this.objectId = RandomStringUtils.randomAlphanumeric(13, 17);
     this.username = username;
     this.email = email;
     if (null == this.roles) this.roles = new ArrayList<>();
