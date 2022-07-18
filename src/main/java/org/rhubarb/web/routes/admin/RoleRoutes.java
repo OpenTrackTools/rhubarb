@@ -32,10 +32,8 @@ public class RoleRoutes extends BaseRoute {
   }
   
   @PreAuthorize("hasAuthority('ADMIN')")
-  @GetMapping(path = {"/new", ""})
+  @GetMapping(path = {"/new"})
   String create(Model m, @ModelAttribute(name = "form") RoleForm form) {
-    m.addAttribute(PATHNAME_KEY, ADMIN_ROLES_PATH);
-    m.addAttribute(Roles.ROLE_LIST_KEY, roleService.listRoles());
-    return ADMIN_ROLES_VIEW;
+    return ADMIN_ROLES_NEW_VIEW;
   }
 }

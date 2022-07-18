@@ -39,6 +39,6 @@ public class DataBase extends BaseEntity {
   @Column(name = "notes")
   private String notes;
   
-  @Column(name = "key", length = 8)
+  @Column(name = "key", length = 8, nullable = false)
   private String key;
 }

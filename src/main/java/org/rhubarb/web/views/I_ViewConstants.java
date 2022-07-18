@@ -23,6 +23,7 @@ public interface I_ViewConstants {
   String ADMIN_ROLES_PATH = "/admin/roles";
   String ADMIN_ROLES_NEW_PATH = "/admin/roles/new";
   String ADMIN_ROLES_VIEW = "admin/roles/index";
+  String ADMIN_ROLES_NEW_VIEW = "admin/roles/new";
   String DASHBOARD_VIEW = "/";
   String DASHBOARD_VIEW_REDIRECTED = REDIRECT + DASHBOARD_VIEW;
   

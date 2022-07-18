@@ -22,12 +22,12 @@
             </ul>
           </div>
         </div>
-        <ul sec:authorize="!hasAuthority('ADMIN')" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <ul sec:authorize="!hasAuthority('ADMINISTRATOR')" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a th:href="@{/}" class="nav-link px-2 text-white">Home</a></li>
           <li><a th:href="@{/issues}" class="nav-link px-2 text-white">Issues</a></li>
         </ul>
         <input type="hidden" th:value="${pathName}">
-        <ul sec:authorize="hasAuthority('ADMIN')" class="nav col-12 col-lg-auto ms-lg-auto ms-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <ul sec:authorize="hasAuthority('ADMINISTRATOR')" class="nav col-12 col-lg-auto ms-lg-auto ms-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a th:href="@{/admin}" class="nav-link px-2 text-white fw-semi-bold" th:classappend="${pathName == '/admin' ? 'active':'' }">Home</a></li>
           <li><a th:href="@{/admin/databases}" class="nav-link px-2 text-white fw-semi-bold" th:classappend="${pathName == '/admin/databases' ? 'active':'' }">Databases</a></li>
           <li><a th:href="@{/admin/category}" class="nav-link px-2 text-white fw-semi-bold" th:classappend="${pathName == '/admin/category' ? 'active':'' }">Categories</a></li>
